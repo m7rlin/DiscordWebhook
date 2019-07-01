@@ -1,8 +1,6 @@
 # DiscordWebhook
 
 Discord Webhook lightweight library for PHP
-<<<<<<< Updated upstream
-=======
 
 Language: [🇺🇸 English](https://github.com/m7rlin/DiscordWebhook), [🇵🇱 Polski](https://github.com/m7rlin/DiscordWebhook/blob/master/README.pl.md)
 
@@ -44,4 +42,5 @@ or
 ## License
 
 [MIT](https://github.com/m7rlin/DiscordWebhook/blob/master/LICENSE)
->>>>>>> Stashed changes
+
+> > > > > > > Stashed changes
