@@ -2,7 +2,7 @@
 
 Discord Webhook lightweight library for PHP
 
-Language: [🇺🇸 English](https://github.com/m7rlin/DiscordWebhook), [🇵🇱 Polski](https://github.com/m7rlin/DiscordWebhook/blob/master/README.pl.md)
+Language: [🇺🇸 English](docs/README.md), [🇵🇱 Polski](docs/README.pl.md)
 
 Discord Webhook Documentation: https://discordapp.com/developers/docs/resources/webhook#execute-webhook
 
