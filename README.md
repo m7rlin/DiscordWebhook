@@ -42,5 +42,3 @@ or
 ## License
 
 [MIT](https://github.com/m7rlin/DiscordWebhook/blob/master/LICENSE)
-
-> > > > > > > Stashed changes
