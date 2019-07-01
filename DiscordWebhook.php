@@ -1,11 +1,11 @@
 <?php
 /**
  * Discord Webhook
- * Wersja: 1.0.0
- * Aktualizacja: 20.01.2019
+ * v1.0.0
+ * Updated: 20.01.2019
  * www.magictm.com
  * (c) Marcin Stawowczyk 2019
- * Licencja: MIT
+ * License: MIT
  */
 final class DiscordWebhook
 {
@@ -15,11 +15,11 @@ final class DiscordWebhook
     private $avatar;
     private $tts;
     /**
-     * @param string $msg 					Wiadomość do przesłania
-     * @param string $url 				  Discord Webhook URL
-     * @param string|null $username Nazwa użytkownika wysyłającego wiadomość
-     * @param string|null $avatar   Obrazek profilowy przesyłającego wiadomość
-     * @param boolean $tts   Czy wiadomość ma być odczytana na głos
+     * @param string $msg           message to send
+     * @param string $url           Discord Webhook URL
+     * @param string|null $username username
+     * @param string|null $avatar   bot avatar
+     * @param boolean $tts          text-to-speech - the message will be readed
      */
     public function __construct(
         string $msg,
