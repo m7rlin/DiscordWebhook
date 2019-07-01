@@ -41,4 +41,4 @@ or
 
 ## Licencja
 
-[MIT](https://github.com/m7rlin/DiscordWebhook/blob/master/LICENSE)
+[MIT](LICENSE)
