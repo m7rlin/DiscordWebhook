@@ -7,7 +7,7 @@
 
 require_once 'DiscordWebhook.php';
 
-$url = "__WEBHOOK_URL__";
+$url = "test";
 
 $message 		= $_POST["content"];
 $username 	= $_POST["username"] ?? "www.magictm.com";
