@@ -1,8 +1,8 @@
 <?php
 /**
  * Discord Webhook
- * v1.0.0
- * Updated: 20.01.2019
+ * v1.0.1
+ * Updated: 17.07.2019
  * www.magictm.com
  * (c) Marcin Stawowczyk 2019
  * License: MIT
@@ -26,7 +26,7 @@ final class DiscordWebhook
         string $url = null,
         string $username = null,
         string $avatar = null,
-        bool $tts = null
+        bool  $tts = null
     )
     {
         $this->msg = $msg;
@@ -40,14 +40,13 @@ final class DiscordWebhook
 
     public function tts(
         bool $tts
-    ): void
+    )
     {
         $this->tts = $tts;
     }
 
-    public function send(): void
+    public function send()
     {
-        echo $this->tts;
         $curl = curl_init();
         //timeouts - 5 seconds
         curl_setopt($curl, CURLOPT_TIMEOUT, 5); // 5 seconds
@@ -68,9 +67,14 @@ final class DiscordWebhook
             curl_exec($curl),
             true
         );
+
         if (curl_getinfo($curl, CURLINFO_HTTP_CODE) != 204) {
             curl_close($curl);
-            throw new Exception("Wystąpił błąd podczas przesyłania wiadomości na Discorda: " . $output['message']);
+            $message = "";
+            foreach ($output as $key => $value) {
+              $message .= ucfirst($key) . " - " .$value[0];
+            }
+            throw new Exception("Wystąpił błąd podczas przesyłania wiadomości na Discorda: " . $message);
         }
         curl_close($curl);
     }
