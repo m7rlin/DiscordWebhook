@@ -2,11 +2,13 @@
 
 Discord Webhook lightweight library for PHP
 
+
 Language: [🇺🇸 English](README.md), [🇵🇱 Polski](README.pl.md)
 
 Discord Webhook Documentation: https://discordapp.com/developers/docs/resources/webhook#execute-webhook
 
 ## Requirements
+
 
 Software you need to have installed before you can use this project:
 
@@ -14,11 +16,11 @@ Software you need to have installed before you can use this project:
 
 They work almost the same way.
 
-- [WAMP](http://www.wampserver.com/) — v3 or [XAMPP](https://www.apachefriends.org)
++ [WAMP](http://www.wampserver.com/) — v3  or [XAMPP](https://www.apachefriends.org)
 
 Then you need the right PHP version. Below v7 won't work.
 
-- PHP — version 7.2.14+
++ PHP — version 7.2.14+
 
 ## Installation
 
@@ -41,4 +43,4 @@ or
 
 ## License
 
-[MIT](LICENSE)
+[MIT](https://github.com/m7rlin/DiscordWebhook/blob/master/LICENSE)
