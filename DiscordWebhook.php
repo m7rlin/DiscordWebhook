@@ -1,53 +1,49 @@
 <?php
 /**
  * Discord Webhook
- * v1.0.0
- * Updated: 20.01.2019
+ * v1.1.0
+ * Updated: 18.07.2019
  * www.magictm.com
  * (c) Marcin Stawowczyk 2019
  * License: MIT
  */
+
+
 final class DiscordWebhook
 {
-    private $msg;
+    private $message;
     private $url;
-    private $username;
+    private $username = "www.magictm.com";
     private $avatar;
+    private $embed = false;
+    private $embeds;
     private $tts;
+
+    private $file;
+
+    private $errors = [];
+
     /**
-     * @param string $msg           message to send
      * @param string $url           Discord Webhook URL
-     * @param string|null $username username
-     * @param string|null $avatar   bot avatar
-     * @param boolean $tts          text-to-speech - the message will be readed
      */
     public function __construct(
-        string $msg,
-        string $url = null,
-        string $username = null,
-        string $avatar = null,
-        bool $tts = null
+        string $url = null
     )
     {
-        $this->msg = $msg;
-        $this->url = $url ??
-            'https://discordapp.com/api/webhooks/536576089582075936/QkY4y6xDDlrPXXtnSXLiAOnIo961w6BXl1SLTE0bj-t0--A-P3thhos5tskW_lIhiRfG';
-        $this->username = $username ?? 'www.magictm.com';
-        $this->avatar = $avatar ??
-            'https://i.ytimg.com/vi/JrQkgLLL9XQ/hqdefault.jpg';
-        $this->tts = $tts ?? false;
+        $this->url = $url;
     }
 
-    public function tts(
-        bool $tts
-    ): void
+    public function send(): ?self
     {
-        $this->tts = $tts;
-    }
 
-    public function send(): void
-    {
-        echo $this->tts;
+      if (!$this->validate()) {
+        $errors = "";
+        foreach ($this->errors as $key => $value) {
+          $errors .= "$value";
+        }
+        throw new Exception("Zanim wyślesz wiadomość na Discorda popraw błędy: ". $errors);
+      }
+
         $curl = curl_init();
         //timeouts - 5 seconds
         curl_setopt($curl, CURLOPT_TIMEOUT, 5); // 5 seconds
@@ -59,10 +55,12 @@ final class DiscordWebhook
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode([
-            'content' => $this->msg,
+            'content' => $this->message,
             'username' => $this->username,
             'avatar_url' => $this->avatar,
-            'tts' => $this->tts
+            'tts' => $this->tts,
+            'file' => $this->file,
+            'embeds' => $this->embeds
         ]));
         $output = json_decode(
             curl_exec($curl),
@@ -70,10 +68,100 @@ final class DiscordWebhook
         );
         if (curl_getinfo($curl, CURLINFO_HTTP_CODE) != 204) {
             curl_close($curl);
-            throw new Exception("Wystąpił błąd podczas przesyłania wiadomości na Discorda: " . $output['message']);
+            $message = "";
+
+            if (!isset($output["message"])) {
+              foreach ($output as $key => $value) {
+                $message .= ucfirst($key) . " - " .$value[0];
+              }
+            } else {
+              $message = $output["message"];
+            }
+
+            throw new Exception("Wystąpił błąd podczas przesyłania wiadomości na Discorda: " . $message);
         }
         curl_close($curl);
+
+        return $this;
     }
+
+
+
+    function setMessage($message): ?self {
+      $this->message = $message;
+      return $this;
+    }
+
+    function getMessage() {
+      return $this->message;
+    }
+
+    function setURL(?string $url): ?self {
+      $this->url = $url;
+      return $this;
+    }
+
+    function getURL(): ?string {
+      return $this->url;
+    }
+
+    function setUsername(?string $username): ?self {
+      $this->username = $username;
+      return $this;
+    }
+
+    function getUsername(): ?string {
+      return $this->username;
+    }
+
+    function setAvatar(?string $avatar): ?self {
+      $this->avatar = $avatar;
+      return $this;
+    }
+
+    function getAvatar(): ?string {
+      return $this->avatar;
+    }
+
+    function setFile(?object $file): ?self {
+      $this->file = curl_file_create($file->getFile(), null, $file->getFileName());
+      return $this;
+    }
+
+    function getFile(): ?string {
+      return $this->file;
+    }
+
+    function setTts(?bool $tts): ?self {
+      $this->tts = $tts;
+      return $this;
+    }
+
+    function getTts(): ?bool {
+      return $this->tts;
+    }
+
+    function reset(): ?self {
+      return $this;
+    }
+
+    private function validate(): bool {
+
+      if (!$this->url || $this->url === "") {
+        $this->errors["url"] = "URL is empty.";
+      }
+      if (!$this->message || $this->message === "") {
+        $this->errors["message"] = "Message is empty.";
+      } else if (strlen($this->message) >= 2000) {
+        $this->errors["message"] = "Message is too long (max. 2000 characters).";
+      }
+      if (empty($this->errors)) {
+        return true;
+      }
+      return false;
+    }
+
+
 }
 
 ?>
