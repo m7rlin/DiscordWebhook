@@ -1,21 +1,23 @@
 <?php
 /**
  * Discord Webhook
- * v1.1.0
- * Updated: 18.07.2019
+ * v1.2.0
+ * Updated: 23.09.2019
  * www.magictm.com
  * (c) Marcin Stawowczyk 2019
  * License: MIT
  */
 
 
+/**
+ * Undocumented class
+ */
 final class DiscordWebhook
 {
     private $message;
     private $url;
     private $username = "www.magictm.com";
     private $avatar;
-    private $embed = false;
     private $embeds;
     private $tts;
 
@@ -24,7 +26,9 @@ final class DiscordWebhook
     private $errors = [];
 
     /**
-     * @param string $url           Discord Webhook URL
+     * Set URL of the Webhook
+     *
+     * @param string $url
      */
     public function __construct(
         string $url = null
@@ -33,7 +37,12 @@ final class DiscordWebhook
         $this->url = $url;
     }
 
-    public function send(): ?self
+    /**
+     * Send Discord Webhook to the Discord server
+     *
+     * @return self
+     */
+    public function send(): self
     {
 
       if (!$this->validate()) {
@@ -86,75 +95,163 @@ final class DiscordWebhook
     }
 
 
-
-    function setMessage($message): ?self {
+    /**
+     * Set message to send
+     *
+     * @param [type] $message
+     * @return self
+     */
+    function setMessage($message): self {
       $this->message = $message;
       return $this;
     }
-
-    function getMessage() {
+    /**
+     * Get message
+     *
+     * @return string
+     */
+    function getMessage(): string {
       return $this->message;
     }
-
-    function setURL(?string $url): ?self {
+    /**
+     * Set URL
+     *
+     * @param string $url
+     * @return self
+     */
+    function setURL(string $url): self {
       $this->url = $url;
       return $this;
     }
-
-    function getURL(): ?string {
+    /**
+     * Get URL
+     *
+     * @return string
+     */
+    function getURL(): string {
       return $this->url;
     }
-
-    function setUsername(?string $username): ?self {
+    /**
+     * Set username
+     *
+     * @param string $username
+     * @return self
+     */
+    function setUsername(string $username): self {
       $this->username = $username;
       return $this;
     }
-
-    function getUsername(): ?string {
+    /**
+     * Get username
+     *
+     * @return string
+     */
+    function getUsername(): string {
       return $this->username;
     }
-
-    function setAvatar(?string $avatar): ?self {
+    /**
+     * Set avatar
+     *
+     * @param string $avatar
+     * @return self
+     */
+    function setAvatar(string $avatar): self {
       $this->avatar = $avatar;
       return $this;
     }
-
-    function getAvatar(): ?string {
+    /**
+     * Get avatar
+     *
+     * @return string
+     */
+    function getAvatar(): string {
       return $this->avatar;
     }
 
-    function setFile(?object $file): ?self {
+    /**
+     * Set
+     *
+     * @param object $file
+     * @return self
+     */
+    function setFile(object $file): self {
       $this->file = curl_file_create($file->getFile(), null, $file->getFileName());
       return $this;
     }
 
-    function getFile(): ?string {
+    /**
+     * Get File that should be send to Discord
+     *
+     * @return object
+     */
+    function getFile(): object {
       return $this->file;
     }
 
-    function setTts(?bool $tts): ?self {
+    /**
+     * Set TTS
+     *
+     * @param [type] $tts
+     * @return void
+     */
+    function setTTS(bool $tts): self {
       $this->tts = $tts;
       return $this;
     }
 
-    function getTts(): ?bool {
+    /**
+     * Get TTS
+     *
+     * @return void
+     */
+    function getTTS(): bool {
       return $this->tts;
     }
 
-    function reset(): ?self {
+    /**
+     * Reset all variables to its default values.
+     *
+     * @return self
+     */
+    function reset(): self {
       return $this;
     }
 
+    /**
+     * Set embed
+     *
+     * @param DiscordEmbed $embed
+     * @return self
+     */
+    function setEmbed(DiscordEmbed $embed): self {
+      $this->embeds[] = $embed->toArray();
+
+      return $this;
+    }
+
+    /**
+     * Validate inputs before sending the webhook.
+     *
+     * @return boolean
+     */
     private function validate(): bool {
 
       if (!$this->url || $this->url === "") {
         $this->errors["url"] = "URL is empty.";
       }
-      if (!$this->message || $this->message === "") {
-        $this->errors["message"] = "Message is empty.";
-      } else if (strlen($this->message) >= 2000) {
+
+      if (count($this->embeds) == 0) {
+        if (!$this->message || $this->message === "") {
+          $this->errors["message"] = "Message is empty.";
+        } else if (strlen($this->message) >= 2000) {
+          $this->errors["message"] = "Message is too long (max. 2000 characters).";
+        }
+      } else if ($this->message && strlen($this->message) >= 2000) {
         $this->errors["message"] = "Message is too long (max. 2000 characters).";
       }
+
+
+
       if (empty($this->errors)) {
         return true;
       }
