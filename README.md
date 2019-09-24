@@ -48,6 +48,8 @@ https://www.youtube.com/playlist?list=PLyBTvYfUy4lGoC9R1-Db_3OWZlevO8Hpv
 
 **Simple example:**
 
+![Website example](https://i.imgur.com/inA39rv.png)
+
 ```
 // load Webhook
 require_once "../../LoadWebhook.php";
@@ -61,6 +63,10 @@ $msg->setUsername($username)->setAvatar($avatar_url)->send();
 ```
 
 **Simple embed example:**
+
+![Website example](https://i.imgur.com/WfhnmH2.png)
+
+![Discord example](https://i.imgur.com/KKpPWxA.png)
 
 ```
 // load Webhook
