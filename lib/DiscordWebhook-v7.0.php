@@ -13,7 +13,7 @@ final class DiscordWebhook
     private $url;
     private $username = "www.magictm.com";
     private $avatar;
-    private $embeds;
+    private $embeds = [];
     private $tts;
 
     private $file;
