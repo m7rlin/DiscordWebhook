@@ -2,9 +2,10 @@
 
 Discord Webhook lekka biblioteka dla języka PHP
 
-Language: [🇺🇸 English](README.md), [🇵🇱 Polski](README.pl.md)
+Language: [English](README.md), [Polski](README.pl.md)
 
-Discord Webhook Dokumentacja: https://discordapp.com/developers/docs/resources/webhook#execute-webhook
+> Czuj się swobodnie rozszerzając bibliotekę:
+> Discord Webhook Dokumentacja: https://discordapp.com/developers/docs/resources/webhook#execute-webhook
 
 ## Wymagania
 
@@ -18,13 +19,15 @@ One działają prawie tak samo.
 
 Następnie potrzebujesz odpowiedniej wersji PHP. Poniżej v7 nie będzie działać.
 
-- PHP — wersja 7.2.14+
+- PHP — wersja 7+
 
 ## Instalacja
 
-Pobierz lub sklonuj repozytorium. Umieść projekt w folderze serwera - `www` dla WAMP i`http` dla XAMPP (jeżeli nie został zmieniony).
+Pobierz lub sklonuj repozytorium. Umieść projekt w folderze serwera — folder `www` dla serwera WAMP i folder `http` dla serwera XAMPP (jeżeli nie został zmieniony).
 
-## Użycie
+## Przykłady
+
+> Przygotowałem przykłady, aby pokazać jak korzystać z biblioteki. Na pewno każdy znajdzie coś dla siebie.
 
 Otwórz przeglądarkę i wpisz:
 
@@ -39,6 +42,10 @@ or
 - `examples` — folder z przykładami
 - `send-message` — folder z jednym przykładem; możesz zmienić nazwę folderu i zmodyfikować adres URL
 
+## Użycie
+
+https://www.youtube.com/playlist?list=PLyBTvYfUy4lGoC9R1-Db_3OWZlevO8Hpv
+
 ## Licencja
 
-[MIT](LICENSE)
+[MIT](https://github.com/m7rlin/DiscordWebhook/blob/master/LICENSE)
