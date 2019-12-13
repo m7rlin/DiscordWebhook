@@ -50,7 +50,7 @@ https://www.youtube.com/playlist?list=PLyBTvYfUy4lGoC9R1-Db_3OWZlevO8Hpv
 
 ![Website example](https://i.imgur.com/inA39rv.png)
 
-```
+```php
 // load Webhook
 require_once "../../LoadWebhook.php";
 
@@ -68,7 +68,7 @@ $msg->setUsername($username)->setAvatar($avatar_url)->send();
 
 ![Discord example](https://i.imgur.com/KKpPWxA.png)
 
-```
+```php
 // load Webhook
 require_once "../../LoadWebhook.php";
 
@@ -86,7 +86,7 @@ The library supports **method chaining**. This is optional, so you can use both 
 
 **No-Method-Chaining:**
 
-```
+```php
 ...
 $msg = new DiscordWebhook($webhook["url"]);
 
@@ -98,7 +98,7 @@ $msg->send();
 
 **Method-Chaining:**
 
-```
+```php
 ...
 $msg = new DiscordWebhook($webhook["url"]);
 
